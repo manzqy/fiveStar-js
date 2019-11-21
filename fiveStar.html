@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>五角星评分案例</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment {
+            font-size: 40px;
+            color: red;
+        }
+
+        .comment li {
+            float: left;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul class="comment">
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+    </ul>
+
+</body>
+
+</html>
+<script src="./jquery-1.10.2.js"></script>
+<script>
+    function fn(num) {
+        $("li").html('☆');
+        $("li").each(function(i,e) {
+            if (i <= num) {
+                $(e).html('★');
+            } else {
+                return true;
+            }
+        })
+    }
+    let key = true;
+    $(".comment li").on("mouseenter", function() {
+        index = $(this).index();
+        fn(index);
+        
+    })
+    $("li").on("mouseleave", function() {
+        key && $("li").html('☆');
+        key || fn(oldIndex);
+    })
+    var oldIndex,index;
+
+    $(".comment li").on("click", function() {
+        oldIndex = $(this).index();
+        fn(oldIndex);
+        key = false;
+    })
+</script>
